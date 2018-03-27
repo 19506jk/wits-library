@@ -1,27 +1,33 @@
 <template>
   <div class="hello">
-    <button v-on:click="signIn">Sign in with Google</button>
+    <div class="signed-in" v-if="isAuthenticated">
+      <div> Welcome to WITS Library </div>
+      <button v-on:click="logout">Sign Out</button>
+    </div>
+    <div v-else>
+      <button v-on:click="signin">Sign in with Google</button>
+    </div>
   </div>
 </template>
 
 <script>
-import { StitchClientFactory } from 'mongodb-stitch';
+import { getStitchClient } from '../lib/stitch-client';
 
 export default {
   name: 'Home',
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-    };
-  },
-  created() {
-    StitchClientFactory.create('wit-lib-ixdpn').then((client) => {
-      this.stitchClient = client;
-    });
+  computed: {
+    isAuthenticated() {
+      return getStitchClient().isAuthenticated();
+    },
   },
   methods: {
-    signIn() {
-      this.stitchClient.authenticate('google', 'http://localhost:8081/');
+    logout() {
+      return getStitchClient().logout().then(() => {
+        location.reload();
+      });
+    },
+    signin() {
+      return getStitchClient().authenticate('google');
     },
   },
 };
