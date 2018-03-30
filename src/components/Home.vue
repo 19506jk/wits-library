@@ -1,8 +1,9 @@
 <template>
   <div class="hello">
     <div class="signed-in" v-if="isAuthenticated">
-      <div> Welcome to WITS Library </div>
-      <button v-on:click="logout">Sign Out</button>
+      <div class="title-message"> Welcome to WITS Library </div>
+      <home-menu/>
+      <el-button type="primary" v-on:click="logout">Sign Out</el-button>
     </div>
     <div v-else>
       <button v-on:click="signin">Sign in with Google</button>
@@ -35,18 +36,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.title-message {
+  font-size: 30px;
+  margin-bottom: 30px;
 }
 </style>
