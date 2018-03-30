@@ -20,6 +20,7 @@
 
 <script>
 import { getStitchClient } from '../lib/stitch-client';
+import addBook from '../lib/api-service';
 
 export default {
   name: 'AddBook',
@@ -47,7 +48,9 @@ export default {
       };
     },
     submitForm() {
-
+      addBook(this.addBookForm)
+        .then(data => console.log(data))
+        .catch(ex => console.log(ex));
     },
   },
 };
