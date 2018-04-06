@@ -1,5 +1,8 @@
 <template>
 <div class="add-book">
+  <div class="navigation">
+    <el-button @click="navigateBack">Back</el-button>
+  </div>
   <el-form label-width="120px" :label-position="labelPosition">
     <el-form-item label="Book Name">
       <el-input v-model="addBookForm.bookName"></el-input>
@@ -57,6 +60,9 @@ export default {
         .then(data => console.log(data))
         .catch(ex => console.log(ex));
     },
+    navigateBack() {
+      this.$router.go(-1);
+    },
   },
 };
 </script>
@@ -66,5 +72,10 @@ export default {
     margin-left: auto;
     margin-right: auto;
     width: 700px;
+  }
+
+  .navigation {
+    margin-bottom: 30px;
+    text-align: left;
   }
 </style>
