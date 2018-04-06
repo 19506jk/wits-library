@@ -4,6 +4,9 @@
     <el-button type="primary" v-on:click="onAddBook">Add a Book</el-button>
   </el-row>
   <el-row>
+    <el-button type="primary">Book List</el-button>
+  </el-row>
+  <el-row>
     <el-button type="primary">Checkout a Book</el-button>
   </el-row>
   <el-row>

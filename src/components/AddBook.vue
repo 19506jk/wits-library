@@ -1,6 +1,6 @@
 <template>
 <div class="add-book">
-  <el-form label-width="120px">
+  <el-form label-width="120px" :label-position="labelPosition">
     <el-form-item label="Book Name">
       <el-input v-model="addBookForm.bookName"></el-input>
     </el-form-item>
@@ -9,6 +9,9 @@
     </el-form-item>
     <el-form-item label="ISBN">
       <el-input v-model="addBookForm.isbn"></el-input>
+    </el-form-item>
+    <el-form-item label="Amazon Link">
+      <el-input v-model="addBookForm.amazonLink"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm">Submit</el-button>
@@ -20,7 +23,7 @@
 
 <script>
 import { getStitchClient } from '../lib/stitch-client';
-import addBook from '../lib/api-service';
+import { addBook } from '../lib/api-service';
 
 export default {
   name: 'AddBook',
@@ -32,10 +35,12 @@ export default {
   data() {
     return {
       userData: null,
+      labelPosition: 'left',
       addBookForm: {
         bookName: '',
         isbn: '',
         author: '',
+        amazonLink: '',
       },
     };
   },
@@ -58,7 +63,8 @@ export default {
 
 <style scoped>
   .add-book {
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
   }
 </style>
