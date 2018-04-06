@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <div class="signed-in" v-if="isAuthenticated">
       <div class="title-message"> Welcome to WITS Library </div>
       <home-menu/>
@@ -36,6 +36,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home {
+  text-align: center;
+}
 .title-message {
   font-size: 30px;
   margin-bottom: 30px;

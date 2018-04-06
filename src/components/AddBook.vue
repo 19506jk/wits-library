@@ -1,8 +1,6 @@
 <template>
 <div class="add-book">
-  <div class="navigation" v-if="!bookAdded">
-    <el-button @click="navigateBack">Back</el-button>
-  </div>
+  <back-navigation v-if="!bookAdded"></back-navigation>
   <el-form label-width="120px" :label-position="labelPosition" v-if="!bookAdded">
     <el-form-item label="Book Name">
       <el-input v-model="addBookForm.bookName"></el-input>
@@ -69,9 +67,6 @@ export default {
         })
         .catch(ex => console.log(ex));
     },
-    navigateBack() {
-      this.$router.go(-1);
-    },
     addNewBook() {
       this.bookAdded = false;
     },
@@ -84,11 +79,6 @@ export default {
     margin-left: auto;
     margin-right: auto;
     width: 700px;
-  }
-
-  .navigation {
-    margin-bottom: 30px;
-    text-align: left;
   }
 
   .success-text {

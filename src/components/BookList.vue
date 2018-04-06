@@ -1,14 +1,17 @@
 <template>
-  <el-table class="book-table" :data="books">
-    <el-table-column
-      prop="name"
-      label="Name">
-    </el-table-column>
-    <el-table-column
-      prop="author"
-      label="Author">
-    </el-table-column>
-  </el-table>
+  <div class="book-list">
+    <back-navigation></back-navigation>
+    <el-table class="book-table" :data="books" v-if="books.length > 0">
+      <el-table-column
+        prop="name"
+        label="Name">
+      </el-table-column>
+      <el-table-column
+        prop="author"
+        label="Author">
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -24,12 +27,10 @@ export default {
     getBooks()
       .then((res) => {
         if (res.data) {
-          const books = res.data.map((book) => {
-            return {
-              name: book.name,
-              author: book.author
-            };
-          });
+          const books = res.data.map(book => ({
+            name: book.name,
+            author: book.author,
+          }));
           this.books = books;
         }
       })

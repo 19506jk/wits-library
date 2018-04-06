@@ -31,6 +31,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .home-menu {
+    text-align: center;
+  }
   .el-row {
     margin-bottom: 15px;
   }
