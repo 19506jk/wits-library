@@ -1,9 +1,9 @@
 <template>
 <div class="add-book">
-  <div class="navigation">
+  <div class="navigation" v-if="!bookAdded">
     <el-button @click="navigateBack">Back</el-button>
   </div>
-  <el-form label-width="120px" :label-position="labelPosition">
+  <el-form label-width="120px" :label-position="labelPosition" v-if="!bookAdded">
     <el-form-item label="Book Name">
       <el-input v-model="addBookForm.bookName"></el-input>
     </el-form-item>
@@ -21,6 +21,11 @@
       <el-button @click="resetForm">Reset</el-button>
     </el-form-item>
   </el-form>
+  <div v-else>
+      <div class="success-text">Book added</div>
+      <el-button @click="addNewBook">Add another book</el-button>
+      <el-button @click="navigateBack">Back</el-button>
+    </div>
 </div>
 </template>
 
@@ -37,7 +42,6 @@ export default {
   },
   data() {
     return {
-      userData: null,
       labelPosition: 'left',
       addBookForm: {
         bookName: '',
@@ -45,6 +49,7 @@ export default {
         author: '',
         amazonLink: '',
       },
+      bookAdded: false,
     };
   },
   methods: {
@@ -53,15 +58,22 @@ export default {
         bookName: '',
         isbn: '',
         author: '',
+        amazonLink: '',
       };
     },
     submitForm() {
       addBook(this.addBookForm)
-        .then(data => console.log(data))
+        .then(() => {
+          this.resetForm();
+          this.bookAdded = true;
+        })
         .catch(ex => console.log(ex));
     },
     navigateBack() {
       this.$router.go(-1);
+    },
+    addNewBook() {
+      this.bookAdded = false;
     },
   },
 };
@@ -77,5 +89,10 @@ export default {
   .navigation {
     margin-bottom: 30px;
     text-align: left;
+  }
+
+  .success-text {
+    font-size: 28px;
+    margin-bottom: 20px;
   }
 </style>
