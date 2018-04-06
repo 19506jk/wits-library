@@ -7,6 +7,8 @@ import {
   Form,
   FormItem,
   Input,
+  Table,
+  TableColumn,
 } from 'element-ui';
 
 import App from './App';
@@ -33,5 +35,7 @@ Vue.use(Row);
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(Input);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 Vue.component('home-menu', HomeMenu);

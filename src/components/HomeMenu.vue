@@ -1,10 +1,10 @@
 <template>
 <div class="home-menu">
   <el-row>
-    <el-button type="primary" v-on:click="onAddBook">Add a Book</el-button>
+    <el-button type="primary" @click="onAddBook">Add a Book</el-button>
   </el-row>
   <el-row>
-    <el-button type="primary">Book List</el-button>
+    <el-button type="primary" @click="onBookList">Book List</el-button>
   </el-row>
   <el-row>
     <el-button type="primary">Checkout a Book</el-button>
@@ -21,6 +21,9 @@ export default {
   methods: {
     onAddBook() {
       this.$router.push('/add-book');
+    },
+    onBookList() {
+      this.$router.push('/book-list');
     },
   },
 };
