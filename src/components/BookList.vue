@@ -22,7 +22,17 @@ export default {
   },
   created() {
     getBooks()
-      .then(data => console.log(data))
+      .then((res) => {
+        if (res.data) {
+          const books = res.data.map((book) => {
+            return {
+              name: book.name,
+              author: book.author
+            };
+          });
+          this.books = books;
+        }
+      })
       .catch(ex => console.log(ex));
   },
 };

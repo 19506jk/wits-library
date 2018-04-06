@@ -1,38 +1,37 @@
-import 'whatwg-fetch';
+import axios from 'axios';
 import { getUserId } from './stitch-client';
 
 const KEY = '12345';
 
-function buildFetchCall(url, method, payload, headers) {
-  const signature = {
-    'Auth-Id': getUserId(),
-  };
-  const fullUrl = `${url}?secret=${KEY}`;
-
-  return fetch(fullUrl, {
-    method,
-    headers: Object.assign({}, headers, signature),
-    body: JSON.stringify(payload),
-  })
-    .then(res => res.json());
+function buildUrl(url) {
+  return `${url}?secret=${KEY}`;
 }
 
-function addBook(payload) {
-  const url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/addBooks';
+function buildHeader(headers) {
+  return Object.assign({}, headers, { 'Auth-Id': getUserId() });
+}
+
+function addBook(data) {
+  const url = buildUrl('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/addBooks');
   const headers = {
     'Content-Type': 'application/json',
   };
-  return buildFetchCall(url, 'POST', payload, headers);
+  return axios.post(url, {
+    headers: buildHeader(headers),
+    data,
+  });
 }
 
 function getBooks() {
-  const url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/getBooks';
-  return buildFetchCall(url, 'GET');
+  const url = buildUrl('https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/getBooks');
+  return axios.get(url);
 }
 
 function testHook() {
-  const url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/testHook';
-  return buildFetchCall(url, 'POST', { d: 'd' });
+  const url = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook/testHook?secret=12345';
+  return axios.post(url, { d: 'd' })
+    .then(data => console.log(data))
+    .catch(ex => console.log(ex));
 }
 
 export { addBook, getBooks, testHook };
