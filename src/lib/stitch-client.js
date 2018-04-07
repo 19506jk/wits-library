@@ -19,4 +19,13 @@ function getUserId() {
   return userId;
 }
 
-export { initializeStitch, getStitchClient, getUserId };
+function getUserProfile() {
+  return stitchClient.userProfile();
+}
+
+export {
+  initializeStitch,
+  getStitchClient,
+  getUserId,
+  getUserProfile,
+};

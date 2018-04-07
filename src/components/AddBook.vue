@@ -11,9 +11,6 @@
     <el-form-item label="ISBN">
       <el-input v-model="addBookForm.isbn"></el-input>
     </el-form-item>
-    <el-form-item label="Amazon Link">
-      <el-input v-model="addBookForm.amazonLink"></el-input>
-    </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="submitForm">Submit</el-button>
       <el-button @click="resetForm">Reset</el-button>
@@ -28,16 +25,18 @@
 </template>
 
 <script>
-import { getStitchClient } from '../lib/stitch-client';
 import { addBook } from '../lib/api-service';
+
+const form = {
+  bookName: '',
+  isbn: '',
+  author: '',
+  owner: null,
+  history: [],
+};
 
 export default {
   name: 'AddBook',
-  created() {
-    getStitchClient().userProfile().then((data) => {
-      this.userData = data;
-    });
-  },
   data() {
     return {
       labelPosition: 'left',
@@ -45,19 +44,15 @@ export default {
         bookName: '',
         isbn: '',
         author: '',
-        amazonLink: '',
+        owner: null,
+        history: [],
       },
       bookAdded: false,
     };
   },
   methods: {
     resetForm() {
-      this.addBookForm = {
-        bookName: '',
-        isbn: '',
-        author: '',
-        amazonLink: '',
-      };
+      this.addBookForm = { ...form };
     },
     submitForm() {
       addBook(this.addBookForm)
