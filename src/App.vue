@@ -1,6 +1,13 @@
 <template>
   <div id="app">
-    <router-view/>
+    <el-container>
+      <el-aside width="200px">
+        <nav-menu></nav-menu>
+      </el-aside>
+      <el-main>
+        <router-view/>
+      </el-main>
+    </el-container>
   </div>
 </template>
 

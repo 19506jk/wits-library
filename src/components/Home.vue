@@ -2,7 +2,6 @@
   <div class="home">
     <div class="signed-in" v-if="isAuthenticated">
       <div class="title-message"> Welcome to WITS Library </div>
-      <home-menu/>
       <el-button type="primary" v-on:click="logout">Sign Out</el-button>
     </div>
     <div v-else>

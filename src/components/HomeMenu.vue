@@ -7,10 +7,7 @@
     <el-button type="primary" @click="onBookList">Book List</el-button>
   </el-row>
   <el-row>
-    <el-button type="primary">Checkout a Book</el-button>
-  </el-row>
-  <el-row>
-    <el-button type="primary">Return a Book</el-button>
+    <el-button type="primary" @click="onBookManagement">Book Management</el-button>
   </el-row>
 </div>
 </template>
@@ -18,14 +15,7 @@
 <script>
 export default {
   name: 'HomeMenu',
-  methods: {
-    onAddBook() {
-      this.$router.push('/add-book');
-    },
-    onBookList() {
-      this.$router.push('/book-list');
-    },
-  },
+
 };
 </script>
 

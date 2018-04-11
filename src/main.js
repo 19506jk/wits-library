@@ -2,13 +2,18 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import {
+  Aside,
   Button,
-  Row,
+  Container,
   Form,
   FormItem,
   Input,
+  Main,
+  Row,
   Table,
   TableColumn,
+  Menu,
+  MenuItem,
 } from 'element-ui';
 
 import App from './App';
@@ -17,6 +22,7 @@ import { initializeStitch } from './lib/stitch-client';
 
 import HomeMenu from './components/HomeMenu';
 import BackNavigation from './components/BackNavigation';
+import NavMenu from './components/NavMenu';
 
 Vue.config.productionTip = false;
 
@@ -38,6 +44,12 @@ Vue.use(FormItem);
 Vue.use(Input);
 Vue.use(Table);
 Vue.use(TableColumn);
+Vue.use(Main);
+Vue.use(Aside);
+Vue.use(Container);
+Vue.use(Menu);
+Vue.use(MenuItem);
 
 Vue.component('home-menu', HomeMenu);
 Vue.component('back-navigation', BackNavigation);
+Vue.component('nav-menu', NavMenu);
