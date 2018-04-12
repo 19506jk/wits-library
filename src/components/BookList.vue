@@ -1,6 +1,5 @@
 <template>
   <div class="book-list">
-    <back-navigation></back-navigation>
     <el-table class="book-table" :data="books" v-if="books.length > 0">
       <el-table-column
         prop="name"

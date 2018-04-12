@@ -1,7 +1,5 @@
 <template>
   <div class="book-management">
-    <back-navigation></back-navigation>
-
   </div>
 </template>
 

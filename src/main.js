@@ -21,7 +21,6 @@ import router from './router';
 import { initializeStitch } from './lib/stitch-client';
 
 import HomeMenu from './components/HomeMenu';
-import BackNavigation from './components/BackNavigation';
 import NavMenu from './components/NavMenu';
 
 Vue.config.productionTip = false;
@@ -51,5 +50,4 @@ Vue.use(Menu);
 Vue.use(MenuItem);
 
 Vue.component('home-menu', HomeMenu);
-Vue.component('back-navigation', BackNavigation);
 Vue.component('nav-menu', NavMenu);

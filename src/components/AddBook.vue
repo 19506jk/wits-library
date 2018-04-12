@@ -1,6 +1,5 @@
 <template>
 <div class="add-book">
-  <back-navigation v-if="!bookAdded"></back-navigation>
   <el-form label-width="120px" :label-position="labelPosition" v-if="!bookAdded">
     <el-form-item label="Book Name">
       <el-input v-model="addBookForm.bookName"></el-input>

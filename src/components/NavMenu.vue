@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { getStitchClient } from '../lib/stitch-client';
+
 export default {
   name: 'NavMenu',
   methods: {
@@ -23,10 +25,26 @@ export default {
     onBookManagement() {
       this.$router.push('/book-management');
     },
+    onSignin() {
+      return getStitchClient().authenticate('google');
+    },
+    onLogout() {
+      return getStitchClient().logout().then(() => {
+        location.reload();
+      });
+    },
+  },
+  computed: {
+    navItems() {
+      if (getStitchClient().isAuthenticated()) {
+        return this.signedinItems;
+      }
+      return this.guestItems;
+    },
   },
   data() {
     return {
-      navItems: [
+      signedinItems: [
         {
           title: 'Add a Book',
           action: this.onAddBook,
@@ -38,6 +56,16 @@ export default {
         {
           title: 'Book Management',
           action: this.onBookManagement,
+        },
+        {
+          title: 'Log Out',
+          action: this.onLogout,
+        },
+      ],
+      guestItems: [
+        {
+          title: 'Sign In',
+          action: this.onSignin,
         },
       ],
     };
