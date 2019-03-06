@@ -35,7 +35,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!getStitchClient().isAuthenticated() && to.path !== '/') {
+  if (!getStitchClient().isLoggedIn() && to.path !== '/') {
     next('/');
   } else {
     next();

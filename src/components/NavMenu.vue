@@ -15,6 +15,13 @@ import { getStitchClient } from '../lib/stitch-client';
 
 export default {
   name: 'NavMenu',
+  mounted() {
+    getStitchClient().handleLoginResult()
+      .then(() => {
+        this.isLoggedIn = true;
+      })
+      .catch(() => {});
+  },
   methods: {
     onAddBook() {
       this.$router.push('/add-book');
@@ -26,7 +33,7 @@ export default {
       this.$router.push('/book-management');
     },
     onSignin() {
-      return getStitchClient().authenticate('google');
+      return getStitchClient().login();
     },
     onLogout() {
       return getStitchClient().logout().then(() => {
@@ -36,7 +43,7 @@ export default {
   },
   computed: {
     navItems() {
-      if (getStitchClient().isAuthenticated()) {
+      if (this.isLoggedIn) {
         return this.signedinItems;
       }
       return this.guestItems;
@@ -44,6 +51,7 @@ export default {
   },
   data() {
     return {
+      isLoggedIn: false,
       signedinItems: [
         {
           title: 'Add a Book',
