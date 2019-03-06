@@ -18,23 +18,14 @@ import {
 
 import App from './App';
 import router from './router';
-import { initializeStitch } from './lib/stitch-client';
+import { initializeStitchClient } from './lib/stitch-client';
 
 import HomeMenu from './components/HomeMenu';
 import NavMenu from './components/NavMenu';
 
 Vue.config.productionTip = false;
 
-// initialize Stitch client
-initializeStitch().then(() => {
-  /* eslint-disable no-new */
-  new Vue({
-    el: '#app',
-    router,
-    components: { App },
-    template: '<App/>',
-  });
-});
+initializeStitchClient();
 
 Vue.use(Button);
 Vue.use(Row);
@@ -51,3 +42,11 @@ Vue.use(MenuItem);
 
 Vue.component('home-menu', HomeMenu);
 Vue.component('nav-menu', NavMenu);
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>',
+});

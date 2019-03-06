@@ -9,7 +9,7 @@ import { getStitchClient } from '../lib/stitch-client';
 Vue.use(Router);
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -35,7 +35,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (!getStitchClient().isAuthenticated() && to.path !== '/') {
+  if (!getStitchClient().isLoggedIn() && to.path !== '/') {
     next('/');
   } else {
     next();

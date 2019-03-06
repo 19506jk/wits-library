@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getUserId } from './stitch-client';
+import { getStitchClient } from './stitch-client';
 
 const KEY = '12345';
 const BASE_URL = 'https://webhooks.mongodb-stitch.com/api/client/v2.0/app/wit-lib-ixdpn/service/book-management/incoming_webhook';
@@ -12,7 +12,7 @@ function buildApiCall(url, method, headers, data) {
     headers,
     data,
     params: {
-      clientID: getUserId(),
+      clientID: getStitchClient().getUserId(),
       secret: KEY,
     },
   });

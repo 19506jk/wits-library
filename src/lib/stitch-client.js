@@ -1,31 +1,44 @@
-import { StitchClientFactory } from 'mongodb-stitch';
+import {
+  Stitch,
+  GoogleRedirectCredential,
+} from 'mongodb-stitch-browser-sdk';
 
-let stitchClient = null;
-let userId = null;
+const APP_ID = 'wit-lib-ixdpn';
+let stitchClient;
 
-function initializeStitch() {
-  return StitchClientFactory.create('wit-lib-ixdpn').then((client) => {
-    stitchClient = client;
-    userId = client.authedId();
-    return Promise.resolve();
-  });
+class StitchClient {
+  constructor() {
+    this.client = Stitch.initializeDefaultAppClient(APP_ID);
+  }
+
+  login() {
+    return this.client.auth.loginWithRedirect(new GoogleRedirectCredential());
+  }
+
+  logout() {
+    return this.client.auth.logout();
+  }
+
+  getUserId() {
+    return this.client.auth.user.id;
+  }
+
+  getUserProfile() {
+    return this.client.auth.user.profile;
+  }
+
+  isLoggedIn() {
+    console.log(this.client.auth.isLoggedIn);
+    return this.client.auth.isLoggedIn;
+  }
 }
 
-function getStitchClient() {
+export function initializeStitchClient() {
+  if (!stitchClient) {
+    stitchClient = new StitchClient();
+  }
+}
+
+export function getStitchClient() {
   return stitchClient;
 }
-
-function getUserId() {
-  return userId;
-}
-
-function getUserProfile() {
-  return stitchClient.userProfile();
-}
-
-export {
-  initializeStitch,
-  getStitchClient,
-  getUserId,
-  getUserProfile,
-};
